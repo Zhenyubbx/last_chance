@@ -5,7 +5,6 @@ __pycache__/
 
 # Ignore virtual environment directories
 venv/
-logs/
 .env/
 
 # Ignore IDE and editor configurations

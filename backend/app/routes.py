@@ -25,7 +25,6 @@ def upload():
     file = request.files['file']
     base64_image = encode_image(file)
 
-    print("passing image to ChatGPT...")
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
