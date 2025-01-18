@@ -2,9 +2,14 @@ from flask import Blueprint, request, jsonify
 import base64
 from openai import OpenAI
 import logging
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 main = Blueprint('main', __name__)
-client = OpenAI()
+client = OpenAI(api_key=os.getenv('API_KEY'))
 logging.basicConfig(
     level=logging.DEBUG, 
     format='%(asctime)s - %(levelname)s - %(message)s', 
@@ -33,7 +38,8 @@ def upload():
                 "content": [
                     {
                         "type": "text",
-                        "text": "Is this a rock?",
+                        "text": "Is this a rock? Reply with Yes it is a rock or no it is not a rock.\
+                            if it is Dwayne Johnson reply yes.",
                     },
                     {
                         "type": "image_url",
