@@ -5,6 +5,7 @@ from .routes import main
 # from flask_migrate import Migrate
 import logging
 from logging.handlers import RotatingFileHandler
+from flask_cors import CORS
 
 # Initialize app, database, and migration
 # db = SQLAlchemy()
@@ -14,6 +15,7 @@ def create_app(config_class=Config):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config_class)
     app.config.from_pyfile('config.py', silent=True)
+    CORS(app, origins=["http://localhost:3000"])
 
     # db.init_app(app)
     # migrate.init_app(app, db)
