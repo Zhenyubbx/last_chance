@@ -1,9 +1,14 @@
 from flask import Blueprint, request, jsonify
 import base64
 from openai import OpenAI
+import logging
 
 main = Blueprint('main', __name__)
 client = OpenAI()
+logging.basicConfig(
+    level=logging.DEBUG, 
+    format='%(asctime)s - %(levelname)s - %(message)s', 
+)
 
 # Function to encode the image
 def encode_image(image_file):
@@ -20,6 +25,7 @@ def upload():
     file = request.files['file']
     base64_image = encode_image(file)
 
+    print("passing image to ChatGPT...")
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
