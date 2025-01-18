@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, request, jsonify
 import base64
 from openai import OpenAI
 
@@ -16,7 +16,7 @@ def test():
 @main.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
-            return jsonify({'error': 'No file part'}), 400
+        return jsonify({'error': 'No file part'}), 400
     file = request.files['file']
     base64_image = encode_image(file)
 
@@ -38,5 +38,4 @@ def upload():
             }
         ],
     )
-
-    return jsonify(response.choices[0])
+    return jsonify({"status_code": "success", "message": response.choices[0].message.content}), 200
